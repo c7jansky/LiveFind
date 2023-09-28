@@ -10,7 +10,7 @@ import SwiftUI
 struct NotificationsView: View {
     var body: some View {
         ZStack{
-            Color.gray
+            Color("PrimaryColor")
             
             Image(systemName: "bell.fill")
                 .foregroundColor(Color.blue)

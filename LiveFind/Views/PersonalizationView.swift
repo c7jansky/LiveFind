@@ -10,7 +10,7 @@ import SwiftUI
 struct PersonalizationView: View {
     var body: some View {
         ZStack{
-            Color.gray
+            Color("PrimaryColor")
             
             Image(systemName: "person.fill")
                 .foregroundColor(Color.blue)

@@ -10,7 +10,7 @@ import SwiftUI
 struct inYourAreaView: View {
     var body: some View {
         ZStack{
-            Color.gray
+            Color("PrimaryColor")
             
             Image(systemName: "map")
                 .foregroundColor(Color.blue)
