@@ -4,6 +4,7 @@
 //
 //  Created by keckuser on 9/26/23.
 //
+// Commit Token: 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
 
 import SwiftUI
 
@@ -14,6 +15,12 @@ struct SearchView: View {
     private var listOfCountry = countryList
     @State var searchText = ""
     
+    init(){
+        UINavigationBar.appearance().largeTitleTextAttributes = [.foregroundColor:
+                                                                    UIColor.init(Secondary)]
+        UINavigationBar.appearance().backgroundColor = UIColor.init(Primary)
+        
+    }
     
     var body: some View {
         
@@ -27,18 +34,18 @@ struct SearchView: View {
                         Image(systemName: "figure.walk")
                             .foregroundColor(Secondary)
                     }
-                    
                     .padding()
                 }
                 .listRowBackground(Primary)
-                
             }
+            
             .searchable(text: $searchText)
             .navigationTitle("Artists")
             
         }
                
     }
+    
     
     var countries: [String]{
         let lcCountries = listOfCountry.map {$0.lowercased() }
