@@ -15,8 +15,12 @@ struct Artist: Hashable, Codable {
     let has_upcoming_event: String
     let links: String
 }
+
+struct Artists: Hashable, Codable {
+    var performers: [Artist]
+}
 class ArtistModel: ObservableObject {
-    @Published var artists: [Artist] = []
+    @Published var artists: [Artists] = []
     func FetchArtists() {
         guard let url = URL(string:"https://api.seatgeek.com/2/performers?client_id=MzcxNTkzODF8MTY5NjIwMTQ0Ni4wMTMxMzE") else {
             return
@@ -25,7 +29,7 @@ class ArtistModel: ObservableObject {
             return
         }
             do {
-                let artists = try JSONDecoder().decode([Artist].self, from:data)
+                let artists = try JSONDecoder().decode([Artists].self, from:data)
                 DispatchQueue.main.async{
                     self?.artists = artists
                 }
@@ -46,12 +50,13 @@ struct ArtistsView: View {
     var body: some View {
         NavigationView {
             List {
-                ForEach(artistModel.artists, id: \.self) { artist in
+                //ForEach(artistModel.artists, id: \.self) { artist in
+                ForEach(0 ..< artistModel.artists.count, id: \.self) { artist in
                     HStack {
                         Image("")
                             .frame(width:130, height:70)
                             .background(Color.blue)
-                        Text(artist.name)
+                        Text(self.artistModel.artists[artist].performers[artist].name)
                             .bold()
                     }
                     
