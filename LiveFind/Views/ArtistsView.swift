@@ -66,8 +66,12 @@ struct ArtistsView: View {
     }
 }
 
-#Preview {
-    ArtistsView()
+//#Preview {
+//    ArtistsView()
+//}
+struct ArtistsView_Previews: PreviewProvider {
+    static var previews: some View {
+        ArtistsView()
+    }
 }
-
 
