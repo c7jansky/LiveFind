@@ -54,6 +54,7 @@ struct SearchView: View {
             $0.contains(searchText.lowercased())
         }
     }
+    
 }
 
 struct SearchView_Previews: PreviewProvider {
