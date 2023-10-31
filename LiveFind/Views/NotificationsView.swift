@@ -17,6 +17,8 @@ struct NotificationsView: View {
             
             ScrollView{
                 
+                
+                
             }
             .navigationTitle("Notifications")
             .font(.title2)
@@ -50,13 +52,11 @@ struct NotificationsView_Previews: PreviewProvider {
 
 extension NotificationsView{
     
-    private var TitleSection: some View{
-        VStack(alignment: .leading, spacing: 8){
-            Text("Notifications")
-                .font(.largeTitle)
-                .bold()
-                .foregroundColor(Secondary)
+    private var Notification: some View{
+        VStack{
+            
         }
     }
+    
 }
 

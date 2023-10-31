@@ -22,6 +22,7 @@ struct ContentView: View {
                         .foregroundColor(Secondary)
                     Text("Search")
                 }
+            
                 .toolbarBackground(Primary, for: .tabBar)
             inYourAreaView()
                 .tabItem(){
@@ -46,6 +47,7 @@ struct ContentView: View {
                 }
                 .toolbarBackground(Primary, for: .tabBar)
         }
+        .accentColor(Secondary)
     }
 }
 

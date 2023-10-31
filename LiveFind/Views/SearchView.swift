@@ -65,21 +65,23 @@ struct SearchView: View {
                 List{
                     
                     ForEach(Array(0 ..< artistModel.artists.count), id: \.self) { artist in
-                        HStack {
-                            Image("")
-                                .frame(width:110, height:70)
-                                .background(Color.blue)
-                            Text(self.artistModel.artists[artist].name)
-                                .bold()
-                                .foregroundColor(Secondary)
+                        //NavigationLink(destination: ArtistProfile(artist:self.artistModel.artists.[artist])){
                             
+                            HStack {
+                                Image("")
+                                    .frame(width:110, height:70)
+                                    .background(Color.blue)
+                                Text(self.artistModel.artists[artist].name)
+                                    .bold()
+                                    .foregroundColor(Secondary)
+                                
+                                
+                            }
+                            .padding()
                             
-                        }
-                        .padding()
-                        
-                        //listOfNames.append(self.artistModel.artists[artist].performers[artist].name)
+                            //listOfNames.append(self.artistModel.artists[artist].performers[artist].name)
+                        //}
                     }
-                    
                     .listRowBackground(Primary)
                     
                     //.onChange(of: search, perform: performSearch)

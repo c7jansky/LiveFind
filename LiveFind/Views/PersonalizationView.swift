@@ -11,14 +11,31 @@ struct PersonalizationView: View {
     let Primary = Color("PrimaryColor")
     let Secondary = Color("SecondaryColor")
     var body: some View {
-        ZStack{
-            Color("PrimaryColor")
+        NavigationView{
             
-            Image(systemName: "person.fill")
-                .foregroundColor(Color.blue)
-                .font(.system(size: 100.0))
+            ScrollView{
+                
+            }
+            .navigationTitle("My Follows")
+            .font(.title2)
+            .ignoresSafeArea()
+            .background(Primary)
+            .navigationBarTitleDisplayMode(.large)
         }
-        .ignoresSafeArea()
+        .onAppear {
+            let appearance = UINavigationBarAppearance()
+            appearance.backgroundEffect = UIBlurEffect(style: .systemUltraThinMaterial)
+            appearance.backgroundColor = UIColor(Primary)
+            UINavigationBar.appearance().scrollEdgeAppearance = appearance
+            appearance.largeTitleTextAttributes = [.foregroundColor: UIColor.init(Secondary)]
+            
+            appearance.titleTextAttributes = [
+                .foregroundColor: UIColor.init(Secondary),
+            ]
+            
+            UINavigationBar.appearance().standardAppearance = appearance
+            UINavigationBar.appearance().scrollEdgeAppearance = appearance
+        }
     }
 }
 
@@ -31,15 +48,4 @@ struct PersonalizationView_Previews: PreviewProvider {
 
 extension PersonalizationView{
     
-    private var titleSection: some View{
-        VStack(alignment: .leading, spacing: 8){
-            Text("Dr. Dre")
-                .font(.largeTitle)
-                .fontWeight(.semibold)
-                .foregroundColor(Secondary)
-            Text("Rap, R&B")
-                .font(.subheadline)
-                .foregroundColor(Secondary)
-        }
-    }
 }

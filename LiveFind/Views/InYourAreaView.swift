@@ -8,15 +8,34 @@
 import SwiftUI
 
 struct inYourAreaView: View {
+    let Primary = Color("PrimaryColor")
+    let Secondary = Color("SecondaryColor")
     var body: some View {
-        ZStack{
-            Color("PrimaryColor")
+        NavigationView{
             
-            Image(systemName: "map")
-                .foregroundColor(Color.blue)
-                .font(.system(size: 100.0))
+            ScrollView{
+                
+            }
+            .navigationTitle("In My Area")
+            .font(.title2)
+            .ignoresSafeArea()
+            .background(Primary)
+            .navigationBarTitleDisplayMode(.large)
         }
-        .ignoresSafeArea()
+        .onAppear {
+            let appearance = UINavigationBarAppearance()
+            appearance.backgroundEffect = UIBlurEffect(style: .systemUltraThinMaterial)
+            appearance.backgroundColor = UIColor(Primary)
+            UINavigationBar.appearance().scrollEdgeAppearance = appearance
+            appearance.largeTitleTextAttributes = [.foregroundColor: UIColor.init(Secondary)]
+            
+            appearance.titleTextAttributes = [
+                            .foregroundColor: UIColor.init(Secondary),
+                            ]
+            
+            UINavigationBar.appearance().standardAppearance = appearance
+            UINavigationBar.appearance().scrollEdgeAppearance = appearance
+        }
     }
 }
 
