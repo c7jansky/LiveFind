@@ -71,7 +71,7 @@ struct SearchView: View {
         
         NavigationView {
             
-            ZStack {
+            ZStack(alignment: .top){
                 
                 List{
                     
@@ -83,6 +83,7 @@ struct SearchView: View {
                             Text(self.artistModel.artists[artist].name)
                                 .bold()
                                 .foregroundColor(Secondary)
+                            
                             
                         }
                         .padding()
@@ -115,6 +116,11 @@ struct SearchView: View {
                     
                 }
                 
+                GeometryReader { reader in
+                                    Color("PrimaryColor")
+                                        .frame(height: reader.safeAreaInsets.top, alignment: .top)
+                                        .ignoresSafeArea()
+                                }
             }
             
         }
