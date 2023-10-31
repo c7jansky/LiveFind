@@ -18,6 +18,7 @@ struct PersonalizationView: View {
                 .foregroundColor(Color.blue)
                 .font(.system(size: 100.0))
         }
+        .ignoresSafeArea()
     }
 }
 

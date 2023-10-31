@@ -39,6 +39,7 @@ struct ArtistProfile: View {
         .ignoresSafeArea()
         .background(Primary)
         .overlay(backButton, alignment: .topLeading)
+        .overlay(followButton, alignment: .topTrailing)
         
     }
 }
@@ -102,6 +103,22 @@ extension ArtistProfile{
             
         } label: {
             Image(systemName: "xmark")
+                .font(.headline)
+                .padding(16)
+                .foregroundColor(Secondary)
+                .background(Primary)
+                .cornerRadius(10)
+                .shadow(radius: 4)
+                .padding()
+        }
+        
+        
+    }
+    private var followButton: some View {
+        Button{
+            
+        } label: {
+            Image(systemName: "heart")
                 .font(.headline)
                 .padding(16)
                 .foregroundColor(Secondary)

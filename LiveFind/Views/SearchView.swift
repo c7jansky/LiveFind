@@ -89,6 +89,7 @@ struct SearchView: View {
                         
                         //listOfNames.append(self.artistModel.artists[artist].performers[artist].name)
                     }
+                    
                     .listRowBackground(Primary)
                     
                     //.onChange(of: search, perform: performSearch)
@@ -115,8 +116,11 @@ struct SearchView: View {
                 }
                 
             }
+            
         }
+        
     }
+    
 
     
     
