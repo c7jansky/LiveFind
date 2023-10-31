@@ -19,6 +19,8 @@
 		6B6CF5082ABAAB65000BC833 /* LiveFindTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6B6CF5072ABAAB65000BC833 /* LiveFindTests.swift */; };
 		6B6CF5122ABAAB65000BC833 /* LiveFindUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6B6CF5112ABAAB65000BC833 /* LiveFindUITests.swift */; };
 		6B6CF5142ABAAB65000BC833 /* LiveFindUITestsLaunchTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6B6CF5132ABAAB65000BC833 /* LiveFindUITestsLaunchTests.swift */; };
+		6BA748C52ADF707100DF3B31 /* ArtistProfile.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6BA748C42ADF707100DF3B31 /* ArtistProfile.swift */; };
+		6BA748C72ADF85D200DF3B31 /* ArtistSample.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6BA748C62ADF85D200DF3B31 /* ArtistSample.swift */; };
 		6BB1DE582AC3B95200284556 /* SampleData.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6BB1DE572AC3B95200284556 /* SampleData.swift */; };
 /* End PBXBuildFile section */
 
@@ -56,6 +58,8 @@
 		6B6CF50D2ABAAB65000BC833 /* LiveFindUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = LiveFindUITests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		6B6CF5112ABAAB65000BC833 /* LiveFindUITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LiveFindUITests.swift; sourceTree = "<group>"; };
 		6B6CF5132ABAAB65000BC833 /* LiveFindUITestsLaunchTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LiveFindUITestsLaunchTests.swift; sourceTree = "<group>"; };
+		6BA748C42ADF707100DF3B31 /* ArtistProfile.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ArtistProfile.swift; sourceTree = "<group>"; };
+		6BA748C62ADF85D200DF3B31 /* ArtistSample.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ArtistSample.swift; sourceTree = "<group>"; };
 		6BB1DE572AC3B95200284556 /* SampleData.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SampleData.swift; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.swift; };
 /* End PBXFileReference section */
 
@@ -94,6 +98,7 @@
 				6B39B98E2AC36DDE007C06FB /* NotificationsView.swift */,
 				6B39B9902AC36DEC007C06FB /* PersonalizationView.swift */,
 				632444942ACA4A5300474DDB /* ArtistsView.swift */,
+				6BA748C42ADF707100DF3B31 /* ArtistProfile.swift */,
 			);
 			path = Views;
 			sourceTree = "<group>";
@@ -101,6 +106,7 @@
 		6B6CF4E92ABAAB63000BC833 = {
 			isa = PBXGroup;
 			children = (
+				6BA748C62ADF85D200DF3B31 /* ArtistSample.swift */,
 				6B6CF4F42ABAAB63000BC833 /* LiveFind */,
 				6B6CF5062ABAAB65000BC833 /* LiveFindTests */,
 				6B6CF5102ABAAB65000BC833 /* LiveFindUITests */,
@@ -288,6 +294,8 @@
 				6B6CF4F82ABAAB63000BC833 /* ContentView.swift in Sources */,
 				6BB1DE582AC3B95200284556 /* SampleData.swift in Sources */,
 				632444952ACA4A5300474DDB /* ArtistsView.swift in Sources */,
+				6BA748C52ADF707100DF3B31 /* ArtistProfile.swift in Sources */,
+				6BA748C72ADF85D200DF3B31 /* ArtistSample.swift in Sources */,
 				6B39B9912AC36DEC007C06FB /* PersonalizationView.swift in Sources */,
 				6B39B98F2AC36DDE007C06FB /* NotificationsView.swift in Sources */,
 				6B39B98D2AC36DCA007C06FB /* InYourAreaView.swift in Sources */,

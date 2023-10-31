@@ -8,6 +8,7 @@
 import Foundation
 import SwiftUI
 
+/*
 struct Artist: Hashable, Codable {
     let name: String
     let image: String
@@ -79,4 +80,4 @@ struct ArtistsView_Previews: PreviewProvider {
         ArtistsView()
     }
 }
-
+*/
