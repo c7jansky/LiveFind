@@ -124,7 +124,7 @@ struct SearchView: View {
             }
             
         }
-        .overlay(filterButton, alignment: .topTrailing)
+        .overlay(filterButton, alignment: .topTrailing).ignoresSafeArea()
         .background(Primary)
         
     }
@@ -181,9 +181,9 @@ extension SearchView{
                 .padding(16)
                 .foregroundColor(Secondary)
                 .background(Primary)
-                .cornerRadius(10)
+                .cornerRadius(20)
                 .shadow(radius: 4)
-                .padding()
+                .padding(30)
         }
         
     }
