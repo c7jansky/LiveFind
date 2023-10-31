@@ -124,6 +124,8 @@ struct SearchView: View {
             }
             
         }
+        .overlay(filterButton, alignment: .topTrailing)
+        .background(Primary)
         
     }
     
@@ -165,6 +167,25 @@ struct SearchView: View {
 struct SearchView_Previews: PreviewProvider {
     static var previews: some View {
         SearchView()
+    }
+}
+
+extension SearchView{
+    
+    private var filterButton: some View {
+        Button{
+            
+        } label: {
+            Text("Filters")
+                .font(.headline)
+                .padding(16)
+                .foregroundColor(Secondary)
+                .background(Primary)
+                .cornerRadius(10)
+                .shadow(radius: 4)
+                .padding()
+        }
+        
     }
 }
 
