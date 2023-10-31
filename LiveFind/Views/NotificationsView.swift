@@ -8,15 +8,36 @@
 import SwiftUI
 
 struct NotificationsView: View {
+    let Primary = Color("PrimaryColor")
+    let Secondary = Color("SecondaryColor")
+    
     var body: some View {
-        ZStack{
-            Color("PrimaryColor")
+        
+        NavigationView{
             
-            Image(systemName: "bell.fill")
-                .foregroundColor(Color.blue)
-                .font(.system(size: 100.0))
+            ScrollView{
+                
+            }
+            .navigationTitle("Notifications")
+            .font(.title2)
+            .ignoresSafeArea()
+            .background(Primary)
+            .navigationBarTitleDisplayMode(.large)
         }
-        .ignoresSafeArea()
+        .onAppear {
+            let appearance = UINavigationBarAppearance()
+            appearance.backgroundEffect = UIBlurEffect(style: .systemUltraThinMaterial)
+            appearance.backgroundColor = UIColor(Primary)
+            UINavigationBar.appearance().scrollEdgeAppearance = appearance
+            appearance.largeTitleTextAttributes = [.foregroundColor: UIColor.init(Secondary)]
+            
+            appearance.titleTextAttributes = [
+                            .foregroundColor: UIColor.init(Secondary),
+                            ]
+            
+            UINavigationBar.appearance().standardAppearance = appearance
+            UINavigationBar.appearance().scrollEdgeAppearance = appearance
+        }
     }
 }
 
@@ -25,3 +46,17 @@ struct NotificationsView_Previews: PreviewProvider {
         NotificationsView()
     }
 }
+
+
+extension NotificationsView{
+    
+    private var TitleSection: some View{
+        VStack(alignment: .leading, spacing: 8){
+            Text("Notifications")
+                .font(.largeTitle)
+                .bold()
+                .foregroundColor(Secondary)
+        }
+    }
+}
+

@@ -19,6 +19,7 @@ struct Artists: Hashable, Codable {
 }
 class ArtistModel: ObservableObject {
     @Published var artists: [Artist] = []
+    
     func FetchArtists() {
         guard let url = URL(string:"https://api.seatgeek.com/2/performers?per_page=5000&taxonomies.name=concerts&client_id=MzcxNTkzODF8MTY5NjIwMTQ0Ni4wMTMxMzE") else {
             return
@@ -53,18 +54,6 @@ struct SearchView: View {
     @StateObject var artistModel = ArtistModel()
     @State var searchText = ""
     @State var search: String = ""
-    
-    init(){
-        UINavigationBar.appearance().largeTitleTextAttributes = [.foregroundColor:
-                                                                    UIColor.init(Secondary)]
-        UINavigationBar.appearance().backgroundColor = UIColor.init(Primary)
-        
-    }
-    //private func performSearch(keyword: String) {
-        //listOfArtists = networkModel.artists.filter { artist in
-            //artist.title.contains(keyword)
-        //}
-    //}
     
     
     var body: some View {
@@ -115,17 +104,26 @@ struct SearchView: View {
                     artistModel.FetchArtists()
                     
                 }
-                
-                GeometryReader { reader in
-                                    Color("PrimaryColor")
-                                        .frame(height: reader.safeAreaInsets.top, alignment: .top)
-                                        .ignoresSafeArea()
-                                }
             }
             
         }
         .overlay(filterButton, alignment: .topTrailing).ignoresSafeArea()
         .background(Primary)
+        .onAppear {
+            let appearance = UINavigationBarAppearance()
+            appearance.backgroundEffect = UIBlurEffect(style: .systemUltraThinMaterial)
+            appearance.backgroundColor = UIColor(Primary)
+            UINavigationBar.appearance().scrollEdgeAppearance = appearance
+            appearance.largeTitleTextAttributes = [.foregroundColor: UIColor.init(Secondary)]
+            
+            appearance.titleTextAttributes = [
+                .foregroundColor: UIColor.init(Secondary),
+            ]
+            
+            UINavigationBar.appearance().standardAppearance = appearance
+            UINavigationBar.appearance().scrollEdgeAppearance = appearance
+        }
+        
         
     }
     

@@ -46,8 +46,6 @@ struct ContentView: View {
                 }
                 .toolbarBackground(Primary, for: .tabBar)
         }
-
-        
     }
 }
 
