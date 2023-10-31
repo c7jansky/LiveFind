@@ -108,7 +108,7 @@ struct SearchView: View {
                      .listRowBackground(Primary)*/
                     
                 }
-                	
+                .listStyle(PlainListStyle())
                 .navigationTitle("Artists")
                 .searchable(text: $searchText)
                 .onAppear {
