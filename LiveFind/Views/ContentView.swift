@@ -24,6 +24,7 @@ struct ContentView: View {
                 }
             
                 .toolbarBackground(Primary, for: .tabBar)
+            
             inYourAreaView()
                 .tabItem(){
                     Image(systemName: "map.fill")
@@ -31,6 +32,7 @@ struct ContentView: View {
                     Text("Nearby")
                 }
                 .toolbarBackground(Primary, for: .tabBar)
+            
             NotificationsView()
                 .badge(69)
                 .tabItem(){
@@ -39,6 +41,7 @@ struct ContentView: View {
                     Text("Notifications")
                 }
                 .toolbarBackground(Primary, for: .tabBar)
+            
             PersonalizationView()
                 .tabItem(){
                     Image(systemName: "person.circle")
@@ -46,6 +49,7 @@ struct ContentView: View {
                     Text("Profile")
                 }
                 .toolbarBackground(Primary, for: .tabBar)
+            
         }
         .accentColor(Secondary)
     }

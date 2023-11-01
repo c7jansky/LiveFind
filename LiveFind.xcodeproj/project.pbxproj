@@ -21,6 +21,7 @@
 		6B6CF5142ABAAB65000BC833 /* LiveFindUITestsLaunchTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6B6CF5132ABAAB65000BC833 /* LiveFindUITestsLaunchTests.swift */; };
 		6BA748C52ADF707100DF3B31 /* ArtistProfile.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6BA748C42ADF707100DF3B31 /* ArtistProfile.swift */; };
 		6BA748C72ADF85D200DF3B31 /* ArtistSample.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6BA748C62ADF85D200DF3B31 /* ArtistSample.swift */; };
+		6BA748CB2AF1C22400DF3B31 /* userSavedData.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6BA748CA2AF1C22400DF3B31 /* userSavedData.swift */; };
 		6BB1DE582AC3B95200284556 /* SampleData.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6BB1DE572AC3B95200284556 /* SampleData.swift */; };
 /* End PBXBuildFile section */
 
@@ -60,6 +61,7 @@
 		6B6CF5132ABAAB65000BC833 /* LiveFindUITestsLaunchTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LiveFindUITestsLaunchTests.swift; sourceTree = "<group>"; };
 		6BA748C42ADF707100DF3B31 /* ArtistProfile.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ArtistProfile.swift; sourceTree = "<group>"; };
 		6BA748C62ADF85D200DF3B31 /* ArtistSample.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ArtistSample.swift; sourceTree = "<group>"; };
+		6BA748CA2AF1C22400DF3B31 /* userSavedData.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = userSavedData.swift; sourceTree = "<group>"; };
 		6BB1DE572AC3B95200284556 /* SampleData.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SampleData.swift; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.swift; };
 /* End PBXFileReference section */
 
@@ -130,6 +132,7 @@
 				6B39B9892AC36D82007C06FB /* Views */,
 				6B6CF4F92ABAAB64000BC833 /* Assets.xcassets */,
 				6B6CF4FB2ABAAB64000BC833 /* LiveFind.entitlements */,
+				6BA748CA2AF1C22400DF3B31 /* userSavedData.swift */,
 				6B6CF4FC2ABAAB64000BC833 /* Preview Content */,
 				6BB1DE572AC3B95200284556 /* SampleData.swift */,
 			);
@@ -291,6 +294,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				6BA748CB2AF1C22400DF3B31 /* userSavedData.swift in Sources */,
 				6B6CF4F82ABAAB63000BC833 /* ContentView.swift in Sources */,
 				6BB1DE582AC3B95200284556 /* SampleData.swift in Sources */,
 				632444952ACA4A5300474DDB /* ArtistsView.swift in Sources */,

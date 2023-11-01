@@ -35,6 +35,8 @@ struct ArtistProfile: View {
             }
             .frame(maxWidth: .infinity, alignment: .leading)
             .padding()
+            
+            
         }
         .ignoresSafeArea()
         .background(Primary)
