@@ -96,8 +96,11 @@ struct SearchView: View {
                                         switch phase {
                                         case .success(let image):
                                                 image
-                                                .frame(width:110, height:70)
-                                                .background(Color.blue)
+                                                .resizable()
+                                                .scaledToFill() // Fill the frame while maintaining aspect ratio
+                                                .frame(width: 70, height: 70) // Set the frame size (circular diameter)
+                                                .clipShape(Circle()) // Clip the image to a circle
+                                                .overlay(Circle().stroke(Secondary, lineWidth: 2))
                                         case .empty:
                                             ProgressView()
                                         case .failure(_):
@@ -106,7 +109,12 @@ struct SearchView: View {
                                     }
                                     
                                 } else {
-                                    Text("Image Not Available")
+                                    Image(systemName: "guitars.fill")
+                                    .resizable()
+                                    .scaledToFit()
+                                    .frame(width: 70, height: 70)
+                                    .clipShape(Circle())
+                                    .overlay(Circle().stroke(Secondary, lineWidth: 2))
                                 }
                                 //Text(self.artistModel.artists[artist].name)
                                 Text(artist.name)

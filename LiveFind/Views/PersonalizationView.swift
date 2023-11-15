@@ -8,6 +8,11 @@ struct PersonalizationView: View {
     let Primary = Color("PrimaryColor")
     let Secondary = Color("SecondaryColor")
     
+    struct ListItem {
+            let name: String
+            let imageName: String
+        }
+    
     init(){
         UINavigationBar.appearance().largeTitleTextAttributes = [.foregroundColor:
                                                                     UIColor.init(Secondary)]
@@ -18,37 +23,62 @@ struct PersonalizationView: View {
         NavigationView {
             ScrollView {
                 VStack {
+                    Divider()
+                        .frame(minHeight: 1)
+                        .background(Secondary)
                     DisclosureGroup(
-                        isExpanded: $isExpandedFirstList,
-                        content: {
-                            ForEach(DataModel.firstListItems, id: \.self) { item in
-                                Text(item)
-                            }
-                        },
-                        label: {
-                            Text("Followed Artists:")
-                                .foregroundColor(Secondary) // Set the title color to Secondary
-                        }
-                    )
-                    .padding()
-                    .accentColor(Secondary) // Also set accent color if needed
+                                            isExpanded: $isExpandedFirstList,
+                                            content: {
+                                                ForEach(DataModel.firstListItems, id: \.name) { item in
+                                                    HStack {
+                                                        Image(item.imageName) // Use your image logic here
+                                                            .resizable()
+                                                            .scaledToFill() // Ensures the image fills the frame
+                                                            .frame(width: 40, height: 40) // Set the frame size
+                                                            .clipShape(Circle())
+                                                        
+                                                        Text(item.name)
+                                                            .foregroundColor(Secondary)
+                                                    }
+                                                }
+                                            },
+                                            label: {
+                                                Text("Followed Artists:")
+                                                    .foregroundColor(Secondary)
+                                            }
+                                        )
+                                        .padding()
+                                        .accentColor(Secondary)
+
+                                        // Second Disclosure Group
+                                        DisclosureGroup(
+                                            isExpanded: $isExpandedSecondList,
+                                            content: {
+                                                ForEach(DataModel.secondListItems, id: \.name) { item in
+                                                    HStack {
+                                                        Image(item.imageName) // Use your image logic here
+                                                            .resizable()
+                                                            .scaledToFill() // Ensures the image fills the frame
+                                                            .frame(width: 40, height: 40) // Set the frame size
+                                                            .clipShape(Circle())
+                                                        Text(item.name)
+                                                            .foregroundColor(Secondary)
+                                                    }
+                                                }
+                                            },
+                                            label: {
+                                                Text("Followed Concerts:")
+                                                    .foregroundColor(Secondary)
+                                                
+                                            }
+                                        )
+                                        .padding()
+                                        .accentColor(Secondary)
                     
-                    // Second Disclosure Group
-                    DisclosureGroup(
-                        isExpanded: $isExpandedSecondList,
-                        content: {
-                            ForEach(DataModel.secondListItems, id: \.self) { item in
-                                Text(item)
-                            }
-                        },
-                        label: {
-                            Text("Followed Concerts:")
-                                .foregroundColor(Secondary) // Set the title color to Secondary
-                        }
-                    )
-                    .padding()
-                    .accentColor(Secondary) // Also set accent color if needed
                 }
+                Divider()
+                    .frame(minHeight: 1)
+                    .background(Secondary)
                 DatePicker("Select Date", selection: $selectedDate, displayedComponents: .date)
                             .datePickerStyle(GraphicalDatePickerStyle()) // This gives you a calendar view
                             .padding()

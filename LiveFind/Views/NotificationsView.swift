@@ -13,7 +13,7 @@ struct NotificationsView: View {
     var body: some View {
         ZStack{            
             Image(systemName: "bell.fill")
-                .foregroundColor(Secondary)
+                .foregroundColor(Color.blue)
                 .font(.system(size: 100.0))
         }
         .ignoresSafeArea()

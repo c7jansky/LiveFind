@@ -8,6 +8,18 @@
 import Foundation
 
 struct DataModel {
-    static let firstListItems = ["Item 1", "Item 2", "Item 3"]
-    static let secondListItems = ["Item 4", "Item 5", "Item 6"]
+    static let firstListItems = [ListItem(name: "Artist 1", imageName: "artist1Image"),
+                                 ListItem(name: "Artist 2", imageName: "artist2Image"),
+                                 // ... more items
+                                ]
+
+    static let secondListItems = [ListItem(name: "Concert 1", imageName: "concert1Image"),
+                                  ListItem(name: "Concert 2", imageName: "concert2Image"),
+                                  // ... more items
+                                 ]
+}
+
+struct ListItem {
+    let name: String
+    let imageName: String
 }
