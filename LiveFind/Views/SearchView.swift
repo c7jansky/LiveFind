@@ -85,10 +85,10 @@ struct SearchView: View {
         NavigationView {
             ZStack(alignment: .top){
                 List{
-                    ForEach(artistModel.artists, id: \.id) { artist in
-                        //NavigationLink {
-                        //   ArtistProfile()
-                        //NavigationLink(destination: ArtistProfile(artist: artistModel.artists[artist])){
+                    ForEach(artistModel.artists.filter {
+                        // Filter artists based on the search text
+                        searchText.isEmpty || $0.name.lowercased().contains(searchText.lowercased())
+                    }, id: \.id) { artist in
                         NavigationLink(destination: ArtistProfile(artist: artist), label: {
                             HStack {
                                 if let imageURL = URL(string: artist.image ?? "") {
@@ -142,24 +142,9 @@ struct SearchView: View {
             
         }
         .environment(\.colorScheme, .dark)
-        .overlay(filterButton, alignment: .topTrailing).ignoresSafeArea()
+        //.overlay(filterButton, alignment: .topTrailing).ignoresSafeArea()
     }
     
-
-    
-    
-        //var Names: [String]{
-         
-             //ForEach(0 ..< artistModel.artists.count, id: \.self) { artist in
-             //artistList.add(self.artistModel.artists[artist].performers[artist].name)         }
-         //let artistLits = listOfArtists.map
-         //let listOfArtists = artistModel.artists.filter { artist in
-             //artistModel.artists[artist].performers[artist].name
-         //let lcArtists = listOfArtists.artists.performers[Artist].name.flatMap { name in return name.lowercased() }
-         //ForEach(0 ..< artistModel.artists.count, id: \.self) { artist in
-         //   listOfNames.append(artistModel.artists[artist].performers[artist].name)
-             
-         //}
     var Names: [String]{
         
          artistModel.artists.forEach{ artist in
