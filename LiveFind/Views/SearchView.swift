@@ -9,17 +9,34 @@
 import SwiftUI
 
 struct Artist: Hashable, Codable {
+    static func == (lhs: Artist, rhs: Artist) -> Bool {
+        return lhs.id == rhs.id
+    }
+    func hash(into hasher: inout Hasher) {
+            hasher.combine(id)
+        }
     let name: String
     let id: Int
+    let url: String
+    let image: String?
     let links: Array<String>
+    let genres: [Genre]?
+    let has_upcoming_events: Bool
 }
+struct Genre: Codable, Identifiable {
+    let id: Int
+    let name: String
+    let slug: String
+    let primary: Bool
+}
+
+
 
 struct Artists: Hashable, Codable {
     public var performers: [Artist]
 }
 class ArtistModel: ObservableObject {
     @Published var artists: [Artist] = []
-    
     func FetchArtists() {
         guard let url = URL(string:"https://api.seatgeek.com/2/performers?per_page=5000&taxonomies.name=concerts&client_id=MzcxNTkzODF8MTY5NjIwMTQ0Ni4wMTMxMzE") else {
             return
@@ -55,23 +72,50 @@ struct SearchView: View {
     @State var searchText = ""
     @State var search: String = ""
     
+    init(){
+        UINavigationBar.appearance().largeTitleTextAttributes = [.foregroundColor:
+                                                                    UIColor.init(Secondary)]
+        UINavigationBar.appearance().backgroundColor = UIColor.init(Primary)
+        
+    }
+    //private func performSearch(keyword: String) {
+        //listOfArtists = networkModel.artists.filter { artist in
+            //artist.title.contains(keyword)
+        //}
+    //}
+    
     
     var body: some View {
         
+        //NavigationSplitView {
         NavigationView {
-            
             ZStack(alignment: .top){
-                
                 List{
-                    
-                    ForEach(Array(0 ..< artistModel.artists.count), id: \.self) { artist in
-                        //NavigationLink(destination: ArtistProfile(artist:self.artistModel.artists.[artist])){
-                            
+                    ForEach(artistModel.artists, id: \.id) { artist in
+                        //NavigationLink {
+                        //   ArtistProfile()
+                        //NavigationLink(destination: ArtistProfile(artist: artistModel.artists[artist])){
+                        NavigationLink(destination: ArtistProfile(artist: artist), label: {
                             HStack {
-                                Image("")
-                                    .frame(width:110, height:70)
-                                    .background(Color.blue)
-                                Text(self.artistModel.artists[artist].name)
+                                if let imageURL = URL(string: artist.image ?? "") {
+                                    AsyncImage(url: imageURL) { phase in
+                                        switch phase {
+                                        case .success(let image):
+                                                image
+                                                .frame(width:110, height:70)
+                                                .background(Color.blue)
+                                        case .empty:
+                                            ProgressView()
+                                        case .failure(_):
+                                            Text("Image Not Available")
+                                        }
+                                    }
+                                    
+                                } else {
+                                    Text("Image Not Available")
+                                }
+                                //Text(self.artistModel.artists[artist].name)
+                                Text(artist.name)
                                     .bold()
                                     .foregroundColor(Secondary)
                                 
@@ -80,23 +124,13 @@ struct SearchView: View {
                             .padding()
                             
                             //listOfNames.append(self.artistModel.artists[artist].performers[artist].name)
-                        //}
+                            
+                        }
+                     )
                     }
+                    
+                    //}
                     .listRowBackground(Primary)
-                    
-                    //.onChange(of: search, perform: performSearch)
-                    
-                    /*ForEach(countries, id: \.self) {country in
-                     HStack{
-                     Text(country.capitalized)
-                     .foregroundColor(Secondary)
-                     Spacer()
-                     Image(systemName: "figure.walk")
-                     .foregroundColor(Secondary)
-                     }
-                     .padding()
-                     }
-                     .listRowBackground(Primary)*/
                     
                 }
                 .listStyle(PlainListStyle())
@@ -106,26 +140,19 @@ struct SearchView: View {
                     artistModel.FetchArtists()
                     
                 }
+                    
+                
+                GeometryReader { reader in
+                                    Color("PrimaryColor")
+                                        .frame(height: reader.safeAreaInsets.top, alignment: .top)
+                                        .ignoresSafeArea()
+                                }
             }
             
         }
+                                       
         .overlay(filterButton, alignment: .topTrailing).ignoresSafeArea()
         .background(Primary)
-        .onAppear {
-            let appearance = UINavigationBarAppearance()
-            appearance.backgroundEffect = UIBlurEffect(style: .systemUltraThinMaterial)
-            appearance.backgroundColor = UIColor(Primary)
-            UINavigationBar.appearance().scrollEdgeAppearance = appearance
-            appearance.largeTitleTextAttributes = [.foregroundColor: UIColor.init(Secondary)]
-            
-            appearance.titleTextAttributes = [
-                .foregroundColor: UIColor.init(Secondary),
-            ]
-            
-            UINavigationBar.appearance().standardAppearance = appearance
-            UINavigationBar.appearance().scrollEdgeAppearance = appearance
-        }
-        
         
     }
     
@@ -196,3 +223,4 @@ extension SearchView{
       //     .foregroundColor(Color.blue)
         //   .font(.system(size: 100.0))
    //}
+                        
