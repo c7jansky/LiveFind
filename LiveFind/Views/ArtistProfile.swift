@@ -58,7 +58,7 @@ struct ArtistProfile: View {
             .frame(maxWidth: .infinity, alignment: .leading)
             .padding()
         }
-        .ignoresSafeArea()
+        //.ignoresSafeArea()
         .background(Primary)
         .overlay(backButton, alignment: .topLeading)
         .overlay(followButton, alignment: .topTrailing)
