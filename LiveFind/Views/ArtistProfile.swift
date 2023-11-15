@@ -58,13 +58,17 @@ struct ArtistProfile: View {
             .frame(maxWidth: .infinity, alignment: .leading)
             .padding()
         }
+        .environment(\.colorScheme, .dark)
         //.ignoresSafeArea()
-        .background(Primary)
+        //.background(Primary)
         .overlay(backButton, alignment: .topLeading)
         .overlay(followButton, alignment: .topTrailing)
         
+        
     }
+    
 }
+
 
 struct ArtistProfile_Previews: PreviewProvider {
     static var previews: some View {

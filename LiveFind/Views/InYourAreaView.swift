@@ -64,12 +64,14 @@ class EventViewModel: ObservableObject {
 
 
 struct inYourAreaView: View {
+    let Primary = Color("PrimaryColor")
+    let Secondary = Color("SecondaryColor")
     var body: some View {
         ZStack{
-            Color("PrimaryColor")
+            //Color("PrimaryColor")
             
             Image(systemName: "map")
-                .foregroundColor(Color.blue)
+                .foregroundColor(Secondary)
                 .font(.system(size: 100.0))
         }
         .ignoresSafeArea()

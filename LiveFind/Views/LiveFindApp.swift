@@ -12,6 +12,7 @@ struct LiveFindApp: App {
     var body: some Scene {
         WindowGroup {
             ContentView()
+                .environment(\.colorScheme, .dark) // Apply Dark Mode globally
         }
     }
 }

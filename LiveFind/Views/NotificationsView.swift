@@ -8,12 +8,12 @@
 import SwiftUI
 
 struct NotificationsView: View {
+    let Primary = Color("PrimaryColor")
+    let Secondary = Color("SecondaryColor")
     var body: some View {
-        ZStack{
-            Color("PrimaryColor")
-            
+        ZStack{            
             Image(systemName: "bell.fill")
-                .foregroundColor(Color.blue)
+                .foregroundColor(Secondary)
                 .font(.system(size: 100.0))
         }
         .ignoresSafeArea()

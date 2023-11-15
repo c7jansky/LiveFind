@@ -22,14 +22,15 @@ struct ContentView: View {
                         .foregroundColor(Secondary)
                     Text("Search")
                 }
-                .toolbarBackground(Primary, for: .tabBar)
+                //.toolbarBackground(Primary, for: .tabBar)
+            
             inYourAreaView()
                 .tabItem(){
                     Image(systemName: "map.fill")
                         .foregroundColor(Secondary)
                     Text("Nearby")
                 }
-                .toolbarBackground(Primary, for: .tabBar)
+                //.toolbarBackground(Primary, for: .tabBar)
             NotificationsView()
                 .badge(69)
                 .tabItem(){
@@ -37,17 +38,18 @@ struct ContentView: View {
                         .foregroundColor(Secondary)
                     Text("Notifications")
                 }
-                .toolbarBackground(Primary, for: .tabBar)
+                //.toolbarBackground(Primary, for: .tabBar)
             PersonalizationView()
                 .tabItem(){
                     Image(systemName: "person.circle")
                         .foregroundColor(Primary)
                     Text("Profile")
                 }
-                .toolbarBackground(Primary, for: .tabBar)
+                //.toolbarBackground(Primary, for: .tabBar)
         }
+        .accentColor(Secondary)
+        .environment(\.colorScheme, .dark)
 
-        
     }
 }
 
@@ -56,4 +58,4 @@ struct ContentView_Previews: PreviewProvider {
         ContentView()
     }
 }
-	
+

@@ -75,15 +75,9 @@ struct SearchView: View {
     init(){
         UINavigationBar.appearance().largeTitleTextAttributes = [.foregroundColor:
                                                                     UIColor.init(Secondary)]
-        UINavigationBar.appearance().backgroundColor = UIColor.init(Primary)
         
     }
-    //private func performSearch(keyword: String) {
-        //listOfArtists = networkModel.artists.filter { artist in
-            //artist.title.contains(keyword)
-        //}
-    //}
-    
+
     
     var body: some View {
         
@@ -122,15 +116,10 @@ struct SearchView: View {
                                 
                             }
                             .padding()
-                            
-                            //listOfNames.append(self.artistModel.artists[artist].performers[artist].name)
-                            
                         }
                      )
                     }
                     
-                    //}
-                    .listRowBackground(Primary)
                     
                 }
                 .listStyle(PlainListStyle())
@@ -141,19 +130,11 @@ struct SearchView: View {
                     
                 }
                     
-                
-                GeometryReader { reader in
-                                    Color("PrimaryColor")
-                                        .frame(height: reader.safeAreaInsets.top, alignment: .top)
-                                        .ignoresSafeArea()
-                                }
             }
             
         }
                                        
         .overlay(filterButton, alignment: .topTrailing).ignoresSafeArea()
-        .background(Primary)
-        
     }
     
 
@@ -215,12 +196,3 @@ extension SearchView{
         
     }
 }
-
-//   ZStack{
-  //     Color("PrimaryColor")
-       
-    //   Image(systemName: "magnifyingglass")
-      //     .foregroundColor(Color.blue)
-        //   .font(.system(size: 100.0))
-   //}
-                        

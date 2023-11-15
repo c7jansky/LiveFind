@@ -20,6 +20,7 @@
 		6B6CF5122ABAAB65000BC833 /* LiveFindUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6B6CF5112ABAAB65000BC833 /* LiveFindUITests.swift */; };
 		6B6CF5142ABAAB65000BC833 /* LiveFindUITestsLaunchTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6B6CF5132ABAAB65000BC833 /* LiveFindUITestsLaunchTests.swift */; };
 		6B71434D2B05510400B9ADB4 /* DataModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6B71434C2B05510400B9ADB4 /* DataModel.swift */; };
+		6B71434F2B055F4400B9ADB4 /* CustomColorSchemeEnvironment.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6B71434E2B055F4400B9ADB4 /* CustomColorSchemeEnvironment.swift */; };
 		6BA748C52ADF707100DF3B31 /* ArtistProfile.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6BA748C42ADF707100DF3B31 /* ArtistProfile.swift */; };
 		6BA748C72ADF85D200DF3B31 /* ArtistSample.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6BA748C62ADF85D200DF3B31 /* ArtistSample.swift */; };
 		6BB1DE582AC3B95200284556 /* SampleData.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6BB1DE572AC3B95200284556 /* SampleData.swift */; };
@@ -60,6 +61,7 @@
 		6B6CF5112ABAAB65000BC833 /* LiveFindUITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LiveFindUITests.swift; sourceTree = "<group>"; };
 		6B6CF5132ABAAB65000BC833 /* LiveFindUITestsLaunchTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LiveFindUITestsLaunchTests.swift; sourceTree = "<group>"; };
 		6B71434C2B05510400B9ADB4 /* DataModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DataModel.swift; sourceTree = "<group>"; };
+		6B71434E2B055F4400B9ADB4 /* CustomColorSchemeEnvironment.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CustomColorSchemeEnvironment.swift; sourceTree = "<group>"; };
 		6BA748C42ADF707100DF3B31 /* ArtistProfile.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ArtistProfile.swift; sourceTree = "<group>"; };
 		6BA748C62ADF85D200DF3B31 /* ArtistSample.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ArtistSample.swift; sourceTree = "<group>"; };
 		6BB1DE572AC3B95200284556 /* SampleData.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SampleData.swift; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.swift; };
@@ -108,6 +110,7 @@
 		6B6CF4E92ABAAB63000BC833 = {
 			isa = PBXGroup;
 			children = (
+				6B71434E2B055F4400B9ADB4 /* CustomColorSchemeEnvironment.swift */,
 				6B71434C2B05510400B9ADB4 /* DataModel.swift */,
 				6BA748C62ADF85D200DF3B31 /* ArtistSample.swift */,
 				6B6CF4F42ABAAB63000BC833 /* LiveFind */,
@@ -299,6 +302,7 @@
 				6B71434D2B05510400B9ADB4 /* DataModel.swift in Sources */,
 				632444952ACA4A5300474DDB /* ArtistsView.swift in Sources */,
 				6BA748C52ADF707100DF3B31 /* ArtistProfile.swift in Sources */,
+				6B71434F2B055F4400B9ADB4 /* CustomColorSchemeEnvironment.swift in Sources */,
 				6BA748C72ADF85D200DF3B31 /* ArtistSample.swift in Sources */,
 				6B39B9912AC36DEC007C06FB /* PersonalizationView.swift in Sources */,
 				6B39B98F2AC36DDE007C06FB /* NotificationsView.swift in Sources */,
