@@ -16,8 +16,10 @@ struct NotificationsView: View {
                 .foregroundColor(Color.blue)
                 .font(.system(size: 100.0))
         }
+        .environment(\.colorScheme, .dark)
         .ignoresSafeArea()
     }
+    
 }
 
 struct NotificationsView_Previews: PreviewProvider {

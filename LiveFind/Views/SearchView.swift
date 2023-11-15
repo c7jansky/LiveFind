@@ -141,7 +141,7 @@ struct SearchView: View {
             }
             
         }
-                                       
+        .environment(\.colorScheme, .dark)
         .overlay(filterButton, alignment: .topTrailing).ignoresSafeArea()
     }
     

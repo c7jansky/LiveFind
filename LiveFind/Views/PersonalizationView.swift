@@ -49,7 +49,11 @@ struct PersonalizationView: View {
                                         )
                                         .padding()
                                         .accentColor(Secondary)
-
+                    
+                                        Divider()
+                                            .frame(minHeight: 1)
+                                            .background(Secondary)
+                    
                                         // Second Disclosure Group
                                         DisclosureGroup(
                                             isExpanded: $isExpandedSecondList,

@@ -62,7 +62,8 @@ import MapKit
 //
 //
 //
-
+import SwiftUI
+import MapKit
 
 struct inYourAreaView: View {
     let Primary = Color("PrimaryColor")
@@ -78,29 +79,58 @@ struct inYourAreaView: View {
         center: CLLocationCoordinate2D(latitude: 37.7749, longitude: -122.4194),
         span: MKCoordinateSpan(latitudeDelta: 0.05, longitudeDelta: 0.05)
     )
+    
+    @State private var isOverlayVisible = false // Track the visibility of the overlay
 
     var body: some View {
         NavigationView {
-            ScrollView {
-                VStack {
-                    ZStack {
-                        
-                        Map(coordinateRegion: $region, showsUserLocation: true)
-                            .onAppear {
-                                // You can update the region with the user's current location here
-                                // For demonstration, we'll use a static location
-                                let newRegion = MKCoordinateRegion(
-                                    center: CLLocationCoordinate2D(latitude: 37.7749, longitude: -122.4194), // Replace with the user's current coordinates
-                                    span: MKCoordinateSpan(latitudeDelta: 0.05, longitudeDelta: 0.05)
-                                )
-                                region = newRegion
-                            }
+            ZStack {
+                Map(coordinateRegion: $region, showsUserLocation: true)
+                    .onAppear {
+                        // You can update the region with the user's current location here
+                        // For demonstration, we'll use a static location
+                        let newRegion = MKCoordinateRegion(
+                            center: CLLocationCoordinate2D(latitude: 37.7749, longitude: -122.4194), // Replace with the user's current coordinates
+                            span: MKCoordinateSpan(latitudeDelta: 0.05, longitudeDelta: 0.05)
+                        )
+                        region = newRegion
                     }
+                    //.ignoresSafeArea()
+                
+                VStack {
+                    Spacer()
+                    if isOverlayVisible {
+                        // Collapsible overlay
+                        ScrollView {
+                            // Your content for the overlay goes here
+                            ForEach(0..<10) { index in
+                                Text("Item \(index)")
+                                    .padding()
+                            }
+                        }
+                        .frame(maxWidth: .infinity, maxHeight: 300) // Span the entire area
+                        .background(.black) // Set the background color of the overlay
+                        .cornerRadius(0) // Remove corner radius
+                    }
+                    
+                    Button(action: {
+                        isOverlayVisible.toggle()
+                    }) {
+                        Image(systemName: isOverlayVisible ? "chevron.down.circle.fill" : "chevron.up.circle.fill")
+                            .font(.largeTitle)
+                            .foregroundColor(.black)
+                            .background(Secondary)
+                            .clipShape(Circle())
+                            .padding()
+                            .offset(y: isOverlayVisible ? 0 : -20) // Adjust the offset based on overlay visibility
+                    }
+                    .offset(y: isOverlayVisible ? 0 : -20) // Adjust the offset based on overlay visibility
                 }
+                
             }
-            .navigationBarTitle("In Your Area", displayMode: .large) // Add a navigation title
+            .navigationBarTitle("In Your Area")
         }
-        .ignoresSafeArea()
+        .environment(\.colorScheme, .dark)
     }
 }
 
