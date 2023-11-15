@@ -34,12 +34,11 @@ struct ArtistProfile: View {
                     }
                     
                 } else {
-                    Text("Image Not Available")
+                    Image(systemName: "guitars.fill")
+                    .resizable()
+                    .scaledToFit()
+                    .shadow(color: Color.black.opacity(0.3), radius: 20, x: 0, y: 10)
                 }
-//                Image("Dre")
-//                    .resizable()
-//                    .scaledToFit()
-//                    .shadow(color: Color.black.opacity(0.3), radius: 20, x: 0, y: 10)
             }
             
             VStack(alignment: .leading, spacing: 16){
