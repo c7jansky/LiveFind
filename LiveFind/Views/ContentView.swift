@@ -11,6 +11,9 @@ import SwiftUI
 struct ContentView: View {
     let Primary = Color("PrimaryColor")
     let Secondary = Color("SecondaryColor")
+    
+    
+    
     var body: some View {
         
         TabView(){

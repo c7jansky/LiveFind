@@ -107,11 +107,13 @@ struct NotificationsView: View {
     ]
     let imageNames = ["bell.fill", "bell.fill", "bell.fill", "heart.fill"]
 
-    init() {
-        UINavigationBar.appearance().largeTitleTextAttributes = [.foregroundColor:
-                                                                    UIColor.init(Secondary)]
-    }
-
+//    init() {
+//        UINavigationBar.appearance().largeTitleTextAttributes = [.foregroundColor:
+//                                                                    UIColor.init(Secondary)]
+//    }
+    
+   // @Binding var badgeValue: Int
+        
     var body: some View {
         NavigationView {
             ScrollView {
@@ -128,6 +130,10 @@ struct NotificationsView: View {
                 .listStyle(PlainListStyle())
             }
             .navigationTitle("Notifications")
+        }
+        .onAppear {
+            // Update the badge value with the count of notifications
+            //badgeValue = titles.count
         }
         .environment(\.colorScheme, .dark)
         .ignoresSafeArea()

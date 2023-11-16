@@ -12,6 +12,8 @@ struct ArtistProfile: View {
     let Primary = Color("PrimaryColor")
     let Secondary = Color("SecondaryColor")
     
+    
+    
     init(artist: Artist) {
         self.artist = artist
     }
@@ -60,7 +62,7 @@ struct ArtistProfile: View {
         .environment(\.colorScheme, .dark)
         //.ignoresSafeArea()
         //.background(Primary)
-        .overlay(backButton, alignment: .topLeading)
+        //.overlay(backButton, alignment: .topLeading)
         .overlay(followButton, alignment: .topTrailing)
         
         
@@ -126,17 +128,6 @@ extension ArtistProfile{
                     .foregroundColor(Secondary)
             }
         }
-        /*List{
-            HStack{
-                Text("country.capitalized")
-                    .foregroundColor(Secondary)
-                Spacer()
-                Image(systemName: "figure.walk")
-                    .foregroundColor(Secondary)
-                }
-                .padding()
-        }
-        .listRowBackground(Primary)*/
     }
     
     private var backButton: some View {
