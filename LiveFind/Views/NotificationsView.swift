@@ -4,36 +4,8 @@
 //
 //  Created by keckuser on 9/26/23.
 //
-import SwiftUI
 
 import SwiftUI
-
-struct NotificationItemView: View {
-    let title: String
-    let description: String
-    let imageName: String
-
-    var body: some View {
-        HStack {
-            Image(systemName: imageName)
-                .resizable()
-                .aspectRatio(contentMode: .fit)
-                .frame(width: 50, height: 50)
-                .padding()
-
-            VStack(alignment: .leading) {
-                Text(title)
-                    .font(.headline)
-                Text(description)
-                    .font(.subheadline)
-                    .foregroundColor(.secondary)
-            }
-
-            Spacer()
-        }
-        .padding(.vertical, 8)
-    }
-}
 
 //For the API data:
 
@@ -92,51 +64,67 @@ struct NotificationItemView: View {
 //    }
 //}
 
+//let descriptions = [
+//    "There are 30 days remaining before your concert is to start",
+//    "There are 10 days remaining before your concert is to start",
+//    "Your Concert is happening tonight!! Get Hyped!",
+//    "This liked artist is having a live event soon. Click to see details"
+//]
 
 struct NotificationsView: View {
-    let Primary = Color("PrimaryColor")
-    let Secondary = Color("SecondaryColor")
+    @State private var notifications: [NotificationData] = []
 
-    // Define arrays for different scenarios
-    let titles = ["Notification 1", "Notification 2", "Notification 3", "Liked Artist"]
-    let descriptions = [
-        "There are 30 days remaining before your concert is to start",
-        "There are 10 days remaining before your concert is to start",
-        "Your Concert is happening tonight!! Get Hyped!",
-        "This liked artist is having a live event soon. Click to see details"
-    ]
-    let imageNames = ["bell.fill", "bell.fill", "bell.fill", "heart.fill"]
-
-//    init() {
-//        UINavigationBar.appearance().largeTitleTextAttributes = [.foregroundColor:
-//                                                                    UIColor.init(Secondary)]
-//    }
-    
-   // @Binding var badgeValue: Int
-        
     var body: some View {
         NavigationView {
-            ScrollView {
-                VStack {
-                    ForEach(0..<4) { index in
-                        NotificationItemView(
-                            title: titles[index],
-                            description: descriptions[index],
-                            imageName: imageNames[index]
-                        )
-                        .foregroundColor(Secondary)
-                    }
+            List {
+                ForEach(notifications) { notification in
+                    NotificationItemView(notification: notification)
                 }
-                .listStyle(PlainListStyle())
+                .onDelete(perform: deleteNotification)
             }
-            .navigationTitle("Notifications")
+            .navigationBarTitle("Notifications")
         }
         .onAppear {
-            // Update the badge value with the count of notifications
-            //badgeValue = titles.count
+            notifications = NotificationsManager.shared.loadNotifications()
         }
-        .environment(\.colorScheme, .dark)
-        .ignoresSafeArea()
+    }
+
+    private func deleteNotification(at offsets: IndexSet) {
+        notifications.remove(atOffsets: offsets)
+        NotificationsManager.shared.saveNotifications(notifications)
+    }
+    
+    func addNotification(title: String, description: String, imageName: String) {
+            let newNotification = NotificationData(title: title, description: description, imageName: imageName)
+            notifications.append(newNotification)
+            NotificationsManager.shared.saveNotifications(notifications)
+    }
+}
+
+struct NotificationItemView: View {
+    let Secondary = Color("SecondaryColor")
+    var notification: NotificationData
+    
+    var body: some View {
+        HStack {
+            Image(systemName: notification.imageName)
+                .resizable()
+                .aspectRatio(contentMode: .fit)
+                .frame(width: 50, height: 50)
+                .foregroundColor(Secondary)
+                .padding()
+
+            VStack(alignment: .leading) {
+                Text(notification.title)
+                    .foregroundColor(Secondary)
+                    .font(.headline)
+                Text(notification.description)
+                    .font(.subheadline)
+                    .foregroundColor(.secondary)
+            }
+
+            Spacer()
+        }
     }
 }
 
