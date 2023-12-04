@@ -24,6 +24,7 @@
 		6B7143512B0580C600B9ADB4 /* notificationData.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6B7143502B0580C600B9ADB4 /* notificationData.swift */; };
 		6B7143532B058B6D00B9ADB4 /* ConcertView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6B7143522B058B6D00B9ADB4 /* ConcertView.swift */; };
 		6B7A79642B16EEF700E8323E /* NotificationsManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6B7A79632B16EEF700E8323E /* NotificationsManager.swift */; };
+		6B7A79662B1D5FCC00E8323E /* ConcertProfile.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6B7A79652B1D5FCC00E8323E /* ConcertProfile.swift */; };
 		6BA748C52ADF707100DF3B31 /* ArtistProfile.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6BA748C42ADF707100DF3B31 /* ArtistProfile.swift */; };
 		6BA748C72ADF85D200DF3B31 /* ArtistSample.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6BA748C62ADF85D200DF3B31 /* ArtistSample.swift */; };
 		6BB1DE582AC3B95200284556 /* SampleData.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6BB1DE572AC3B95200284556 /* SampleData.swift */; };
@@ -68,6 +69,7 @@
 		6B7143502B0580C600B9ADB4 /* notificationData.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = notificationData.swift; sourceTree = "<group>"; };
 		6B7143522B058B6D00B9ADB4 /* ConcertView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ConcertView.swift; sourceTree = "<group>"; };
 		6B7A79632B16EEF700E8323E /* NotificationsManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NotificationsManager.swift; sourceTree = "<group>"; };
+		6B7A79652B1D5FCC00E8323E /* ConcertProfile.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ConcertProfile.swift; sourceTree = "<group>"; };
 		6BA748C42ADF707100DF3B31 /* ArtistProfile.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ArtistProfile.swift; sourceTree = "<group>"; };
 		6BA748C62ADF85D200DF3B31 /* ArtistSample.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ArtistSample.swift; sourceTree = "<group>"; };
 		6BB1DE572AC3B95200284556 /* SampleData.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SampleData.swift; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.swift; };
@@ -116,6 +118,7 @@
 		6B6CF4E92ABAAB63000BC833 = {
 			isa = PBXGroup;
 			children = (
+				6B7A79652B1D5FCC00E8323E /* ConcertProfile.swift */,
 				6B7A79632B16EEF700E8323E /* NotificationsManager.swift */,
 				6B7143522B058B6D00B9ADB4 /* ConcertView.swift */,
 				6B7143502B0580C600B9ADB4 /* notificationData.swift */,
@@ -320,6 +323,7 @@
 				6B39B98D2AC36DCA007C06FB /* InYourAreaView.swift in Sources */,
 				6B7143532B058B6D00B9ADB4 /* ConcertView.swift in Sources */,
 				6B39B98B2AC36DB3007C06FB /* SearchView.swift in Sources */,
+				6B7A79662B1D5FCC00E8323E /* ConcertProfile.swift in Sources */,
 				6B6CF4F62ABAAB63000BC833 /* LiveFindApp.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
