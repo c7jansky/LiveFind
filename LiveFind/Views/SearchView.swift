@@ -37,45 +37,38 @@ struct Artists: Hashable, Codable {
 }
 class ArtistModel: ObservableObject {
     @Published var artists: [Artist] = []
-    
-    
-    func fetchArtistDetailByName(name: String, completion: @escaping (Artist?) -> Void) {
-                let encodedName = name.addingPercentEncoding(withAllowedCharacters: .urlQueryAllowed) ?? ""
-                guard let url = URL(string: "https://api.seatgeek.com/2/performers?query=\(encodedName)&client_id=YOUR_CLIENT_ID") else {
+
+        // Fetches artist details by name from the API
+        func fetchArtistDetailByName(name: String, completion: @escaping (Artist?) -> Void) {
+            let encodedName = name.addingPercentEncoding(withAllowedCharacters: .urlQueryAllowed) ?? ""
+            guard let url = URL(string: "https://api.seatgeek.com/2/performers?query=\(encodedName)&client_id=YOUR_CLIENT_ID") else {
+                completion(nil)
+                return
+            }
+
+            let task = URLSession.shared.dataTask(with: url) { data, _, error in
+                guard let data = data, error == nil else {
                     completion(nil)
                     return
                 }
-
-                let task = URLSession.shared.dataTask(with: url) { data, _, error in
-                    guard let data = data, error == nil else {
-                        completion(nil)
-                        return
+                do {
+                    let response = try JSONDecoder().decode(Artists.self, from: data)
+                    DispatchQueue.main.async {
+                        completion(response.performers.first)
                     }
-                    do {
-                        let response = try JSONDecoder().decode(Artists.self, from: data)
-                        DispatchQueue.main.async {
-                            completion(response.performers.first)
-                        }
-                    } catch {
-                        print(error)
-                        completion(nil)
-                    }
+                } catch {
+                    print(error)
+                    completion(nil)
                 }
-                task.resume()
             }
-        
-        
+            task.resume()
+        }
+
+        // Finds an artist by name in the local array
         func findArtistByName(name: String) -> Artist? {
-                return artists.first { $0.name == name }
-            }
-        func FetchArtists() {
-            guard let url = URL(string:"https://api.seatgeek.com/2/performers?per_page=5000&taxonomies.name=concerts&client_id=MzcxNTkzODF8MTY5NjIwMTQ0Ni4wMTMxMzE") else {
-                return
-            }
-            let task = URLSession.shared.dataTask(with: url) { [weak self] data, _, error in guard let data = data, error == nil else{
-                return
-            }
-    
+            return artists.first { $0.name == name }
+        }
+
     func FetchArtists(searchQuery: String? = nil) {
         var urlString = "https://api.seatgeek.com/2/performers?"
 
@@ -105,7 +98,7 @@ class ArtistModel: ObservableObject {
             }
             catch{
                 print(error)
-                
+
             }
         }
         task.resume()

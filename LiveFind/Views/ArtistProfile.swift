@@ -137,7 +137,6 @@ struct ArtistProfile_Previews: PreviewProvider {
                 name: "Pop",
                 slug: "pop_slug",
                 primary: true)], has_upcoming_events: false ))
-        .environmentObject(DataModel.shared)
     }
 }
 
