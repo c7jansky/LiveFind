@@ -41,7 +41,7 @@ class ArtistModel: ObservableObject {
         var urlString = "https://api.seatgeek.com/2/performers?"
 
                 if let searchQuery = searchQuery, !searchQuery.isEmpty {
-                    urlString += "slug=" + searchQuery
+                    urlString += "q=" + searchQuery
                 } else {
                     urlString += "per_page=5000&taxonomies.name=concerts"
                 }
@@ -99,10 +99,7 @@ struct SearchView: View {
         NavigationView {
             ZStack(alignment: .top){
                 List{
-                    ForEach(artistModel.artists.filter {
-                        // Filter artists based on the search text
-                        searchText.isEmpty || $0.name.lowercased().contains(searchText.lowercased())
-                    }, id: \.id) { artist in
+                    ForEach(artistModel.artists, id: \.id) { artist in
                         NavigationLink(destination: ArtistProfile(artist: artist), label: {
                             HStack {
                                 if let imageURL = URL(string: artist.image ?? "") {
