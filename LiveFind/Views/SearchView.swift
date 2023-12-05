@@ -37,43 +37,27 @@ struct Artists: Hashable, Codable {
 }
 class ArtistModel: ObservableObject {
     @Published var artists: [Artist] = []
-    
-    func fetchArtistDetailByName(name: String, completion: @escaping (Artist?) -> Void) {
-            let encodedName = name.addingPercentEncoding(withAllowedCharacters: .urlQueryAllowed) ?? ""
-            guard let url = URL(string: "https://api.seatgeek.com/2/performers?query=\(encodedName)&client_id=YOUR_CLIENT_ID") else {
-                completion(nil)
-                return
-            }
+    func FetchArtists(searchQuery: String? = nil) {
+        var urlString = "https://api.seatgeek.com/2/performers?"
 
-            let task = URLSession.shared.dataTask(with: url) { data, _, error in
-                guard let data = data, error == nil else {
-                    completion(nil)
+                if let searchQuery = searchQuery, !searchQuery.isEmpty {
+                    urlString += "slug=" + searchQuery
+                } else {
+                    urlString += "per_page=5000&taxonomies.name=concerts"
+                }
+
+                urlString += "&client_id=MzcxNTkzODF8MTY5NjIwMTQ0Ni4wMTMxMzE"
+
+                guard let encodedUrlString = urlString.addingPercentEncoding(withAllowedCharacters: .urlQueryAllowed),
+                      let url = URL(string: encodedUrlString) else {
                     return
                 }
-                do {
-                    let response = try JSONDecoder().decode(Artists.self, from: data)
-                    DispatchQueue.main.async {
-                        completion(response.performers.first)
+
+                let task = URLSession.shared.dataTask(with: url) { [weak self] data, _, error in
+                    guard let data = data, error == nil else {
+                        return
                     }
-                } catch {
-                    print(error)
-                    completion(nil)
-                }
-            }
-            task.resume()
-        }
-    
-    
-    func findArtistByName(name: String) -> Artist? {
-            return artists.first { $0.name == name }
-        }
-    func FetchArtists() {
-        guard let url = URL(string:"https://api.seatgeek.com/2/performers?per_page=5000&taxonomies.name=concerts&client_id=MzcxNTkzODF8MTY5NjIwMTQ0Ni4wMTMxMzE") else {
-            return
-        }
-        let task = URLSession.shared.dataTask(with: url) { [weak self] data, _, error in guard let data = data, error == nil else{
-            return
-        }
+
             do {
                 let artists = try JSONDecoder().decode(Artists.self, from:data)
                 DispatchQueue.main.async{
@@ -161,12 +145,14 @@ struct SearchView: View {
                 }
                 .listStyle(PlainListStyle())
                 .navigationTitle("Artists")
-                .searchable(text: $searchText)
                 .onAppear {
                     artistModel.FetchArtists()
                     
                 }
-                    
+                .searchable(text: $searchText)
+                .onChange(of: searchText) { newSearchText in
+                                    artistModel.FetchArtists(searchQuery: newSearchText)
+                                }
             }
             
         }
