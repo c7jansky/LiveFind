@@ -37,13 +37,27 @@ struct Artists: Hashable, Codable {
 }
 class ArtistModel: ObservableObject {
     @Published var artists: [Artist] = []
-    func FetchArtists() {
-        guard let url = URL(string:"https://api.seatgeek.com/2/performers?per_page=5000&taxonomies.name=concerts&client_id=MzcxNTkzODF8MTY5NjIwMTQ0Ni4wMTMxMzE") else {
-            return
-        }
-        let task = URLSession.shared.dataTask(with: url) { [weak self] data, _, error in guard let data = data, error == nil else{
-            return
-        }
+    func FetchArtists(searchQuery: String? = nil) {
+        var urlString = "https://api.seatgeek.com/2/performers?"
+
+                if let searchQuery = searchQuery, !searchQuery.isEmpty {
+                    urlString += "slug=" + searchQuery
+                } else {
+                    urlString += "per_page=5000&taxonomies.name=concerts"
+                }
+
+                urlString += "&client_id=MzcxNTkzODF8MTY5NjIwMTQ0Ni4wMTMxMzE"
+
+                guard let encodedUrlString = urlString.addingPercentEncoding(withAllowedCharacters: .urlQueryAllowed),
+                      let url = URL(string: encodedUrlString) else {
+                    return
+                }
+
+                let task = URLSession.shared.dataTask(with: url) { [weak self] data, _, error in
+                    guard let data = data, error == nil else {
+                        return
+                    }
+
             do {
                 let artists = try JSONDecoder().decode(Artists.self, from:data)
                 DispatchQueue.main.async{
@@ -132,18 +146,24 @@ struct SearchView: View {
                 }
                 .listStyle(PlainListStyle())
                 .navigationTitle("Artists")
-                .searchable(text: $searchText)
                 .onAppear {
                     artistModel.FetchArtists()
                     
                 }
-                    
+                .searchable(text: $searchText)
+                .onChange(of: searchText) { newSearchText in
+                    filteredArtists = artistModel.artists.filter {
+                                            newSearchText.isEmpty || $0.name.lowercased().contains(newSearchText.lowercased())
+                                        }
+//                                    artistModel.FetchArtists(searchQuery: newSearchText)
+                                }
             }
             
         }
         .environment(\.colorScheme, .dark)
         //.overlay(filterButton, alignment: .topTrailing).ignoresSafeArea()
     }
+    @State private var filteredArtists: [Artist] = []
     
     var Names: [String]{
         
