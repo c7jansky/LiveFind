@@ -152,10 +152,7 @@ struct SearchView: View {
                 }
                 .searchable(text: $searchText)
                 .onChange(of: searchText) { newSearchText in
-                    filteredArtists = artistModel.artists.filter {
-                                            newSearchText.isEmpty || $0.name.lowercased().contains(newSearchText.lowercased())
-                                        }
-//                                    artistModel.FetchArtists(searchQuery: newSearchText)
+                                    artistModel.FetchArtists(searchQuery: newSearchText)
                                 }
             }
             
@@ -163,7 +160,6 @@ struct SearchView: View {
         .environment(\.colorScheme, .dark)
         //.overlay(filterButton, alignment: .topTrailing).ignoresSafeArea()
     }
-    @State private var filteredArtists: [Artist] = []
     
     var Names: [String]{
         
