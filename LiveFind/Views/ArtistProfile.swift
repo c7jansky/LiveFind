@@ -12,6 +12,9 @@ struct ArtistProfile: View {
     let Primary = Color("PrimaryColor")
     let Secondary = Color("SecondaryColor")
     
+    @EnvironmentObject var dataModel: DataModel
+
+    
     
     
     init(artist: Artist) {
@@ -24,7 +27,7 @@ struct ArtistProfile: View {
                     AsyncImage(url: imageURL) { phase in
                         switch phase {
                         case .success(let image):
-                                image
+                            image
                                 .resizable()
                                 .scaledToFit()
                                 .shadow(color: Color.black.opacity(0.3), radius: 20, x: 0, y: 10)
@@ -32,6 +35,8 @@ struct ArtistProfile: View {
                             ProgressView()
                         case .failure(_):
                             Text("Image Not Available")
+                        @unknown default:
+                            EmptyView() // Or any other appropriate view for unexpected cases
                         }
                     }
                     
@@ -60,11 +65,8 @@ struct ArtistProfile: View {
             .padding()
         }
         .environment(\.colorScheme, .dark)
-        //.ignoresSafeArea()
-        //.background(Primary)
-        //.overlay(backButton, alignment: .topLeading)
         .overlay(followButton, alignment: .topTrailing)
-        
+            
         
     }
     
@@ -73,15 +75,8 @@ struct ArtistProfile: View {
 
 struct ArtistProfile_Previews: PreviewProvider {
     static var previews: some View {
-        ArtistProfile(artist: Artist(name: "Dr. Dre", id: 11369,url: "äbc",image: "SKSDK",  links: ["link1"], genres: [Genre(
-            id: 1,
-            name: "Pop",
-            slug: "pop_slug",
-            primary: true), Genre(
-                id: 1,
-                name: "Pop",
-                slug: "pop_slug",
-                primary: true)], has_upcoming_events: true ))
+        ArtistProfile(artist: Artist(name: "Sample Artist", id: 1, url: "http://example.com", image: "imageURL", links: ["link1"], genres: [Genre(id: 1, name: "Pop", slug: "pop_slug", primary: true)], has_upcoming_events: true))
+            .environmentObject(DataModel.shared)
     }
 }
 
@@ -147,33 +142,20 @@ extension ArtistProfile{
         
     }
     private var followButton: some View {
-        Button{
-            
-        } label: {
-            Image(systemName: "heart")
-                .font(.headline)
-                .padding(16)
-                .foregroundColor(Secondary)
-                .background(Primary)
-                .cornerRadius(10)
-                .shadow(radius: 4)
-                .padding()
+        Button {
+                    dataModel.toggleArtistFollowState(artist: artist)
+                } label: {
+                    Image(systemName: dataModel.isArtistFollowed(artist: artist) ? "heart.fill" : "heart")
+                    .font(.headline)
+                    .padding(16)
+                    .foregroundColor(Secondary)
+                    .background(Primary)
+                    .cornerRadius(10)
+                    .shadow(radius: 4)
+                    .padding()
         }
         
         
     }
     
 }
-
-/*
-struct ArtistProfileData: Hashable, Codable {
-    let name: String
-    let id: Int
-    let links: Array<String>
-}
-*/
-
-// name + Dr. Dre
-// id = 13635
-// links = []
-// has upcomingevents = false
