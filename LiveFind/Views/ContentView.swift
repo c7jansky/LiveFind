@@ -20,6 +20,7 @@ struct ContentView: View {
             
                         
             SearchView()
+                .environmentObject(DataModel.shared)
                 .tabItem(){
                     Image(systemName: "magnifyingglass")
                         .foregroundColor(Secondary)
@@ -43,6 +44,7 @@ struct ContentView: View {
                 }
                 //.toolbarBackground(Primary, for: .tabBar)
             PersonalizationView()
+                .environmentObject(DataModel.shared)
                 .tabItem(){
                     Image(systemName: "person.circle")
                         .foregroundColor(Primary)

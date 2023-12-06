@@ -37,6 +37,38 @@ struct Artists: Hashable, Codable {
 }
 class ArtistModel: ObservableObject {
     @Published var artists: [Artist] = []
+
+        // Fetches artist details by name from the API
+        func fetchArtistDetailByName(name: String, completion: @escaping (Artist?) -> Void) {
+            let encodedName = name.addingPercentEncoding(withAllowedCharacters: .urlQueryAllowed) ?? ""
+            guard let url = URL(string: "https://api.seatgeek.com/2/performers?query=\(encodedName)&client_id=YOUR_CLIENT_ID") else {
+                completion(nil)
+                return
+            }
+
+            let task = URLSession.shared.dataTask(with: url) { data, _, error in
+                guard let data = data, error == nil else {
+                    completion(nil)
+                    return
+                }
+                do {
+                    let response = try JSONDecoder().decode(Artists.self, from: data)
+                    DispatchQueue.main.async {
+                        completion(response.performers.first)
+                    }
+                } catch {
+                    print(error)
+                    completion(nil)
+                }
+            }
+            task.resume()
+        }
+
+        // Finds an artist by name in the local array
+        func findArtistByName(name: String) -> Artist? {
+            return artists.first { $0.name == name }
+        }
+
     func FetchArtists(searchQuery: String? = nil) {
         var urlString = "https://api.seatgeek.com/2/performers?"
 
@@ -66,7 +98,7 @@ class ArtistModel: ObservableObject {
             }
             catch{
                 print(error)
-                
+
             }
         }
         task.resume()
@@ -95,7 +127,6 @@ struct SearchView: View {
     
     var body: some View {
         
-        //NavigationSplitView {
         NavigationView {
             ZStack(alignment: .top){
                 List{
