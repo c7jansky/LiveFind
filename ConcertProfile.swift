@@ -86,7 +86,7 @@ struct ConcertProfile: View {
 struct ConcertProfile_Previews: PreviewProvider {
     static var previews: some View {
         let samplePerformer = Performer(type: "Artist", name: "John Doe", image: "john_doe_image", id: 456)
-        let sampleEvent = Event(type: "Concert", id: 123, datetimeUTC: "2023-12-01T19:00:00", venue: Venue(state: "CA", name: "Venue Name", postalCode: "12345", city: "Los Angeles"), performers: [samplePerformer])
+        let sampleEvent = Event(type: "Concert", id: 123, datetimeUTC: "2023-12-01T19:00:00", venue: Venue(state: "CA", name: "Venue Name", postalCode: "12345", city: "Los Angeles", location: Location(lat: 0.34, lon: 0.34)), performers: [samplePerformer])
         
         ConcertProfile(event: sampleEvent)
     }

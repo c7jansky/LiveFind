@@ -10,13 +10,42 @@ import MapKit
 
 struct EventResponse: Codable {
     let events: [Event]
+    
+    enum CodingKeys: String, CodingKey {
+        case events = "events"
+    }
 }
-struct Venue: Codable {
+struct Location: Codable {
+    let lat: Double
+    let lon: Double
+}
+struct Venue: Codable, Identifiable {
     let state: String
     let name: String
     let postalCode: String?
     let city: String
+    let location: Location
+
     // Add other properties as needed
+
+    // Generate a unique identifier for each venue
+    var id: String {
+        "\(name)-\(city)-\(location.lat)-\(location.lon)"
+    }
+    
+    // Implement Hashable protocol for comparison
+    static func == (lhs: Venue, rhs: Venue) -> Bool {
+        return lhs.id == rhs.id
+    }
+
+    func hash(into hasher: inout Hasher) {
+        hasher.combine(id)
+    }
+
+    // Implement Identifiable protocol
+    var coordinate: CLLocationCoordinate2D {
+        CLLocationCoordinate2D(latitude: location.lat, longitude: location.lon)
+    }
 }
 
 struct Performer: Codable {
@@ -50,13 +79,13 @@ class EventViewModel: ObservableObject {
 
     func fetchData() {
         // Replace "your_json_url" with the actual URL of your JSON data
-        if let url = URL(string: "https://api.seatgeek.com/2/events?taxonomies.name=concert&datetime_utc.gte=2023-11-13&datetime_utc.lte=2023-12-13&venue.city=Los Angeles&client_id=MzcxNTkzODF8MTY5NjIwMTQ0Ni4wMTMxMzE/") {
+        if let url = URL(string: "https://api.seatgeek.com/2/events?taxonomies.name=concert&datetime_utc.gte=2023-11-13&datetime_utc.lte=2025-12-13&venue.city=Los Angeles&client_id=MzcxNTkzODF8MTY5NjIwMTQ0Ni4wMTMxMzE") {
             URLSession.shared.dataTask(with: url) { data, response, error in
                 if let data = data {
                     do {
-                        let decodedData = try JSONDecoder().decode([Event].self, from: data)
+                        let decodedData = try JSONDecoder().decode(EventResponse.self, from: data)
                         DispatchQueue.main.async {
-                            self.events = decodedData
+                            self.events = decodedData.events
                         }
                     } catch {
                         print("Error decoding JSON: \(error)")
@@ -76,6 +105,8 @@ struct inYourAreaView: View {
     let Primary = Color("PrimaryColor")
     let Secondary = Color("SecondaryColor")
     
+    @StateObject private var eventViewModel = EventViewModel()
+    
     init(){
         UINavigationBar.appearance().largeTitleTextAttributes = [.foregroundColor:
                                                                     UIColor.init(Secondary)]
@@ -83,7 +114,7 @@ struct inYourAreaView: View {
     }
 
     @State private var region = MKCoordinateRegion(
-        center: CLLocationCoordinate2D(latitude: 37.7749, longitude: -122.4194),
+        center: CLLocationCoordinate2D(latitude: 34.0522, longitude: -118.2437),
         span: MKCoordinateSpan(latitudeDelta: 0.05, longitudeDelta: 0.05)
     )
     
@@ -92,7 +123,12 @@ struct inYourAreaView: View {
     var body: some View {
         NavigationView {
             ZStack {
-                Map(coordinateRegion: $region, showsUserLocation: true)
+                Map(coordinateRegion: $region, showsUserLocation: true, annotationItems: eventViewModel.events.compactMap { $0.venue }) { venue in
+                    MapMarker(coordinate: CLLocationCoordinate2D(latitude: venue.location.lat, longitude: venue.location.lon), tint: .red)
+                                                    
+                                                
+                                        }
+                                    
                     .onAppear {
                         // You can update the region with the user's current location here
                         // For demonstration, we'll use a static location
@@ -101,6 +137,7 @@ struct inYourAreaView: View {
                             span: MKCoordinateSpan(latitudeDelta: 0.05, longitudeDelta: 0.05)
                         )
                         region = newRegion
+                        print(eventViewModel.events)
                     }
                     //.ignoresSafeArea()
                 
@@ -110,9 +147,11 @@ struct inYourAreaView: View {
                         // Collapsible overlay
                         ScrollView {
                             // Your content for the overlay goes here
-                            ForEach(0..<10) { index in
-                                Text("Item \(index)")
-                                    .padding()
+                            ForEach(eventViewModel.events.indices, id: \.self) { index in
+                                            Text(eventViewModel.events[index].venue.name)
+                                                .padding()
+                            
+                        
                             }
                         }
                         .frame(maxWidth: .infinity, maxHeight: 300) // Span the entire area
