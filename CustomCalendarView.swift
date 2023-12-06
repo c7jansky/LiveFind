@@ -1,20 +1,20 @@
 //
-//  ConcertView.swift
+//  CustomCalendarView.swift
 //  LiveFind
 //
-//  Created by keckuser on 11/15/23.
+//  Created by keckuser on 12/5/23.
 //
 
 import SwiftUI
 
-struct ConcertView: View {
+struct CustomCalendarView: View {
     var body: some View {
         Text(/*@START_MENU_TOKEN@*/"Hello, World!"/*@END_MENU_TOKEN@*/)
     }
 }
 
-struct ConcertView_Previews: PreviewProvider {
+struct CustomCalendarView_Previews: PreviewProvider {
     static var previews: some View {
-        ConcertView()
+        CustomCalendarView()
     }
 }

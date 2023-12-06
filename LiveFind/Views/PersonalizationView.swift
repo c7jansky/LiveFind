@@ -80,6 +80,8 @@ struct PersonalizationView: View {
                         label: {
                             Text("Followed Artists:")
                                 .foregroundColor(Secondary)
+                                .bold()
+                            
                         }
                     )
                     .padding()
@@ -93,21 +95,29 @@ struct PersonalizationView: View {
                     DisclosureGroup(
                         isExpanded: $isExpandedSecondList,
                         content: {
-                            ForEach(dataModel.secondListItems) { item in
-                                HStack {
-                                    Image(item.imageName)
-                                        .resizable()
-                                        .scaledToFill()
-                                        .frame(width: 40, height: 40)
-                                        .clipShape(Circle())
-                                    Text(item.name)
-                                        .foregroundColor(Secondary)
+                            ForEach(dataModel.followedConcerts) { item in
+                                VStack {
+                                    HStack {
+                                        Text(item.name) // Venue name or concert name
+                                            .foregroundColor(Secondary)
+                                        Text("Date: \(item.date)")
+                                            .foregroundColor(Secondary)
+                                            .font(.subheadline)
+                                        Text("Time: \(item.time)")
+                                            .foregroundColor(Secondary)
+                                            .font(.subheadline)
+                                    }
+                                    Divider()
+                                        .frame(height: 2)
+                                        .background(Secondary)
                                 }
+                                .padding(.vertical, 8)
                             }
                         },
                         label: {
                             Text("Followed Concerts:")
                                 .foregroundColor(Secondary)
+                                .bold()
                         }
                     )
                     .padding()
@@ -116,10 +126,12 @@ struct PersonalizationView: View {
                 Divider()
                     .frame(minHeight: 1)
                     .background(Secondary)
+                
                 DatePicker("Select Date", selection: $selectedDate, displayedComponents: .date)
                     .datePickerStyle(GraphicalDatePickerStyle())
                     .padding()
                     .accentColor(Secondary)
+                
             }
             .navigationTitle("Follows")
         }

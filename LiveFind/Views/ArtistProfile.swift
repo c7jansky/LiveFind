@@ -7,30 +7,6 @@
 
 import SwiftUI
 
-//struct Venue: Codable {
-//    let state: String
-//    let name: String
-//    let postalCode: String
-//    let city: String
-//    // Add other properties as needed
-//}
-//
-//struct Performer: Codable {
-//    let type: String
-//    let name: String
-//    let image: String
-//    let id: Int
-//    // Add other properties as needed
-//}
-//
-//struct Event: Codable, Identifiable {
-//    let type: String
-//    let id: Int
-//    let datetimeUTC: String
-//    let venue: Venue
-//    let performers: [Performer]
-//    // Add other properties as needed
-//}
 struct ArtistProfile: View {
     
     @State private var events: [Event] = []
@@ -98,32 +74,6 @@ struct ArtistProfile: View {
     
 }
 
-    
-
-
-//    private var eventsSection: some View {
-//        VStack(alignment: .leading, spacing: 8) {
-//            Text("Upcoming Events")
-//                .font(.headline)
-//                .fontWeight(.semibold)
-//                .foregroundColor(Secondary)
-//
-//            if events.isEmpty {
-//                Text("No upcoming events")
-//                    .font(.subheadline)
-//                    .foregroundColor(Secondary)
-//            } else {
-//                ForEach(events) { event in
-//                    Text(event.datetimeUTC) // Display relevant event details
-//                        .font(.subheadline)
-//                        .foregroundColor(Secondary)
-//                    // Add more event details as needed
-//                }
-            //}
-        //}
-    //}
-
-
 
 struct ArtistProfile_Previews: PreviewProvider {
     static var previews: some View {
@@ -174,7 +124,7 @@ extension ArtistProfile{
     }
     private var descriptionSection: some View{
         VStack(alignment: .leading, spacing: 8){
-            Text("Andre Romell Young, known professionally as Dr. Dre, is an American rapper and record producer. He is the founder and CEO of Aftermath Entertainment and Beats Electronics, and previously co-founded, co-owned, and was the president of Death Row Records." + String(artist.id))
+            Text("DESCRIPTION PLACEHOLDER PLS CHANGE" ) //+ String(artist.id))
                 .font(.subheadline)
                 .foregroundColor(Secondary)
                 
@@ -187,32 +137,52 @@ extension ArtistProfile{
         }
     }
     
-    private var concertSection: some View{
-        VStack(alignment: .leading, spacing: 8){
-            if(artist.has_upcoming_events == false){
+    private var concertSection: some View {
+        VStack(alignment: .leading, spacing: 8) {
+            if artist.has_upcoming_events == false {
                 Text("No Upcoming Concerts")
                     .font(.headline)
                     .fontWeight(.semibold)
                     .foregroundColor(Secondary)
             } else {
                 ForEach(events) { event in
-                    NavigationLink(destination: ConcertProfile(event: event)) {
-                        VStack(alignment: .leading) {
-                            Text("Event ID: \(event.id)" + "Date: \(event.datetimeUTC)" + "Venue: \(event.venue.name)")
-                                .font(.headline)
-                                .fontWeight(.semibold)
-                                .foregroundColor(Secondary)
+                    VStack {
+                        NavigationLink(destination: ConcertProfile(event: event)) {
+                            HStack {
+                                VStack(alignment: .leading, spacing: 4) {
+                                    Text("Venue: \(event.venue.name)")
+                                        .font(.headline)
+                                        .fontWeight(.semibold)
+                                        .foregroundColor(Secondary)
+
+                                    // Display only the first 10 characters of the date
+                                    Text("Date: \(String(event.datetimeUTC.prefix(10)))")
+                                        .font(.subheadline)
+                                        .foregroundColor(Secondary)
+
+                                    // Display everything after the 11th character as time
+                                    Text("Time: \(String(event.datetimeUTC.dropFirst(11)))")
+                                        .font(.subheadline)
+                                        .foregroundColor(Secondary)
+                                }
+
+                                Spacer()
+
+                                Image(systemName: "chevron.right")
+                                    .foregroundColor(Secondary)
+                            }
                         }
+                        Divider()
+                            .frame(minHeight: 1)
+                            .background(Secondary)
                     }
                 }
-                    Text(artist.name + " will soon be performing")
-                        .font(.headline)
-                        .fontWeight(.semibold)
-                        .foregroundColor(Secondary)
-                
             }
+            Spacer()
         }
     }
+
+
     
     private var backButton: some View {
         Button{
@@ -231,20 +201,24 @@ extension ArtistProfile{
         
     }
     private var followButton: some View {
-        Button {
-                    dataModel.toggleArtistFollowState(artist: artist)
-                } label: {
+            Button(action: {
+                dataModel.toggleArtistFollowState(artist: artist)
+            }) {
+                HStack {
+                    Text(dataModel.isArtistFollowed(artist: artist) ? "Unfollow Artist" : "Follow Artist")
+                        .font(.headline)
+                        .foregroundColor(Secondary)
+
                     Image(systemName: dataModel.isArtistFollowed(artist: artist) ? "heart.fill" : "heart")
-                    .font(.headline)
-                    .padding(16)
-                    .foregroundColor(Secondary)
-                    .background(Primary)
-                    .cornerRadius(10)
-                    .shadow(radius: 4)
-                    .padding()
+                        .foregroundColor(Secondary)
+                }
+                .padding(10)
+                .background(Primary) // Replace with your primary color
+                .cornerRadius(10)
+                .shadow(radius: 4)
+            }
+            .padding(.top, 8)
+            .padding(.trailing, 8)
         }
-        
-        
-    }
     
 }
