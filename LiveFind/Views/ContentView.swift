@@ -36,7 +36,7 @@ struct ContentView: View {
                 }
                 //.toolbarBackground(Primary, for: .tabBar)
             NotificationsView()
-                .badge(69)
+                .badge(2)
                 .tabItem(){
                     Image(systemName: "bell.fill")
                         .foregroundColor(Secondary)
