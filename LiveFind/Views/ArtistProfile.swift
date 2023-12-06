@@ -124,9 +124,9 @@ extension ArtistProfile{
     }
     private var descriptionSection: some View{
         VStack(alignment: .leading, spacing: 8){
-            Text("DESCRIPTION PLACEHOLDER PLS CHANGE" ) //+ String(artist.id))
-                .font(.subheadline)
-                .foregroundColor(Secondary)
+//            Text("DESCRIPTION PLACEHOLDER PLS CHANGE" ) //+ String(artist.id))
+//                .font(.subheadline)
+//                .foregroundColor(Secondary)
                 
             
             if let url = URL(string:artist.url) {
